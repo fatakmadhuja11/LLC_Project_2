@@ -1,4 +1,4 @@
-# 🧾 Invoice Generator (Frontend)
+# 🧾 Invoice Generator
 
 ## 📌 Project Description
 The Invoice Generator is a web-based application built using HTML, CSS, and JavaScript. It allows users to create invoices by adding client details and item information. The system automatically calculates totals, applies tax and discounts, and displays a complete invoice in a structured format.
