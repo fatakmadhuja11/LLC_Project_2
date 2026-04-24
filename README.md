@@ -35,14 +35,7 @@ Manual invoice creation is time-consuming and prone to errors in calculations. T
 - Add items with quantity and price  
 - Enter tax and discount percentages  
 - Click "Generate Invoice"  
-- View final invoice with total amount  
-
-## 📷 Screenshots
-(Add your screenshots here)
-
-## 🔗 Project Links
-- GitHub Repository: (Add your link here)  
-- Live Demo: (Add your link here if hosted)  
+- View final invoice with total amount    
 
 ## 💡 Future Improvements
 - Add PDF download feature  
@@ -51,6 +44,6 @@ Manual invoice creation is time-consuming and prone to errors in calculations. T
 - Improve UI with modern design  
 
 ## 👨‍💻 Author
-Srushti kore
+Madhuja Fatak
 
 ⭐ If you like this project, give it a star on GitHub!
