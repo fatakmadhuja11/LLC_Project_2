@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="invoice.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Invoice Generator</h1>
+
+        <form id="invoice-form">
+            <div class="section">
+                <h2>Client Details</h2>
+                <input type="text" id="client-name" placeholder="Client Name" required>
+                <input type="text" id="client-contact" placeholder="Client Contact" required>
+            </div>
+
+            <div class="section">
+                <h2>Items</h2>
+                <input type="number" id="num-items" placeholder="Number of Items" min="1" required>
+                <button type="button" id="add-items-btn">Add Items</button>
+                <div id="items-container"></div>
+            </div>
+
+            <div class="section">
+                <h2>Tax & Discount</h2>
+                <input type="number" id="tax-percent" placeholder="Tax %" min="0" step="0.01">
+                <input type="number" id="discount-percent" placeholder="Discount %" min="0" step="0.01">
+            </div>
+
+            <button type="submit">Generate Invoice</button>
+        </form>
+
+        <div id="invoice-display" class="hidden">
+            <h2>Generated Invoice</h2>
+            <pre id="invoice-content"></pre>
+            <button id="download-btn">Download Invoice</button>
+        </div>
+    </div>
+
+        <canvas id="bubbles-bg"></canvas>
+    
+    <script src="invoice.js"></script>
+        <script>
+        // Floating bubbles animation
+        const canvas = document.getElementById('bubbles-bg');
+        const ctx = canvas.getContext('2d');
+        let bubbles = [];
+        const bubbleCount = 40;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        function randomColor() {
+            const colors = ['#a1c4fd', '#fcb69f', '#c2e9fb', '#ffecd2', '#b2fefa', '#f6d365'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        function createBubble() {
+            return {
+                x: Math.random() * canvas.width,
+                y: canvas.height + Math.random() * canvas.height / 2,
+                r: 10 + Math.random() * 30,
+                speed: 0.5 + Math.random() * 1.5,
+                alpha: 0.2 + Math.random() * 0.4,
+                color: randomColor()
+            };
+        }
+        function initBubbles() {
+            bubbles = [];
+            for (let i = 0; i < bubbleCount; i++) {
+                bubbles.push(createBubble());
+            }
+        }
+        function drawBubbles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let b of bubbles) {
+                ctx.globalAlpha = b.alpha;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.r, 0, 2 * Math.PI);
+                ctx.fillStyle = b.color;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                b.y -= b.speed;
+                if (b.y + b.r < 0) {
+                    Object.assign(b, createBubble());
+                    b.y = canvas.height + b.r;
+                }
+            }
+            requestAnimationFrame(drawBubbles);
+        }
+        initBubbles();
+        drawBubbles();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initBubbles();
+        });
+        </script>
+</body>
+    <div class="animated-bg"></div>
+</html>
